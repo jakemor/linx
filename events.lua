@@ -1,11 +1,11 @@
 local Queue = require("Queue")
 _colors = Queue.new()
 
-_numberColors = 2
+_numberColors = 1
 _boardW = 7
 _boardH = 7
-_waveNumber = 0
-_linesDeleted = 0
+_waveNumber = 1
+_linesDeleted = 1
 
 _doneDeleting = true; 
 _group = nil; 

@@ -82,6 +82,8 @@ function scene:createScene( event )
 	scoreText.alpha = .4
 
 	local playAgain = display.newRect( W-50, 50, 100, 100 )
+	playAgain.alpha = .01; 
+	playAgain:setFillColor( 1, 1, 0 )
 
 	local group = self.view
 	local nextBlocks = nextBlocks.new(H-4)
@@ -101,7 +103,7 @@ function scene:createScene( event )
 			-- reset
 				local function resetGame(  )
 					local tranny = transition.to(gameOverText, {time = 1000, alpha = 0})
-					_linesDeleted = 0; 
+					_linesDeleted = 1; 
 					_score = 0;
 					_combo = 0; 
 					scoreText.text = "0"
@@ -155,8 +157,13 @@ function scene:createScene( event )
 				_numberColors = math.min( _waveNumber, 6 )
 		--	end
 		else
-			_numberColors = 2; 
-			_waveNumber = 2; 
+			if (_linesDeleted > 1) then
+				_numberColors = 2; 
+				_waveNumber = 2; 
+			else 
+				_numberColors = 1; 
+				_waveNumber = 1; 
+			end
 		end 
 		
 		if (not _gotLine) then
@@ -171,7 +178,7 @@ function scene:createScene( event )
 			end
 		else
 			_placed = false;
-			if (board:spotsLeft() == 49) then
+			if (board:spotsLeft() >= 48) then
 				_gotLine = false;
 				_placed = true; 
 			end 
